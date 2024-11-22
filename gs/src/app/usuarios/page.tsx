@@ -1,41 +1,47 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
-// Definição do tipo Usuário
+// Tipo do Usuário
 type Usuario = {
-  id: string;
+  id: number;
   nome: string;
   email: string;
   telefone: string;
+  endereco: string;
+  cargo: string;
+  dataCadastro: string;
 };
 
 export default function Usuarios() {
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchUsuarios() {
       try {
         const res = await fetch("/api/usuarios");
-        if (!res.ok) throw new Error("Erro ao buscar usuários.");
+        if (!res.ok) throw new Error("Erro ao carregar usuários.");
         const data = await res.json();
         setUsuarios(data);
-      } catch (error) {
-        console.error(error);
+      } catch (err: any) {
+        setError(err.message || "Erro inesperado.");
+      } finally {
+        setLoading(false);
       }
     }
     fetchUsuarios();
   }, []);
 
+  if (loading) return <p className="text-center text-gray-500">Carregando...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
+
   return (
     <main className="p-8">
       <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
-        Usuários
+        Usuários Registrados
       </h1>
-      <p className="text-lg text-gray-700 text-center mb-10">
-        Visualize e gerencie os usuários registrados.
-      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {usuarios.map((usuario) => (
           <div
@@ -45,18 +51,21 @@ export default function Usuarios() {
             <h2 className="text-2xl font-semibold text-blue-500">
               {usuario.nome}
             </h2>
-            <p className="text-gray-600">
+            <p>
               <strong>Email:</strong> {usuario.email}
             </p>
-            <p className="text-gray-600">
+            <p>
               <strong>Telefone:</strong> {usuario.telefone}
             </p>
-            <Link
-              href={`/usuarios/${usuario.id}`}
-              className="text-blue-500 hover:underline mt-2 block"
-            >
-              Ver Detalhes
-            </Link>
+            <p>
+              <strong>Endereço:</strong> {usuario.endereco}
+            </p>
+            <p>
+              <strong>Cargo:</strong> {usuario.cargo}
+            </p>
+            <p>
+              <strong>Data de Cadastro:</strong> {usuario.dataCadastro}
+            </p>
           </div>
         ))}
       </div>

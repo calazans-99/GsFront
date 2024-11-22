@@ -2,50 +2,70 @@
 
 import { useEffect, useState } from "react";
 
-// Definição do tipo para Relatório de Consumo
-type RelatorioConsumo = {
+type Financeiro = {
   mes: string;
-  consumo: number;
+  receita: number;
+  despesaFixa: number;
+  despesaVariavel: number;
+  despesaTotal: number;
+  lucro: number;
+  margemLucro: string;
+  crescimento: string;
 };
 
-export default function RelatorioConsumo() {
-  const [dados, setDados] = useState<RelatorioConsumo[]>([]);
+export default function RelatorioFinanceiro() {
+  const [dados, setDados] = useState<Financeiro[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchConsumo() {
+    async function fetchFinanceiro() {
       try {
-        const res = await fetch("/api/relatorios/consumo");
-        if (!res.ok) throw new Error("Erro ao buscar dados do consumo.");
-        const data: RelatorioConsumo[] = await res.json();
+        const res = await fetch("/api/relatorios/financeiro");
+        if (!res.ok) throw new Error("Erro ao carregar dados financeiros.");
+        const data: Financeiro[] = await res.json();
         setDados(data);
-      } catch (error) {
-        console.error(error);
+      } catch (err: any) {
+        setError(err.message || "Erro inesperado.");
+      } finally {
+        setLoading(false);
       }
     }
-    fetchConsumo();
+    fetchFinanceiro();
   }, []);
 
-  if (dados.length === 0) {
-    return <p className="text-center text-gray-500">Carregando...</p>;
-  }
+  if (loading) return <p className="text-center text-gray-500">Carregando...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
     <main className="p-8">
-      <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
-        Relatório de Consumo
+      <h1 className="text-4xl font-bold text-yellow-600 text-center mb-6">
+        Relatório Financeiro
       </h1>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr>
             <th className="border border-gray-300 px-4 py-2">Mês</th>
-            <th className="border border-gray-300 px-4 py-2">Consumo (kWh)</th>
+            <th className="border border-gray-300 px-4 py-2">Receita (R$)</th>
+            <th className="border border-gray-300 px-4 py-2">Despesas Fixas</th>
+            <th className="border border-gray-300 px-4 py-2">Despesas Variáveis</th>
+            <th className="border border-gray-300 px-4 py-2">Despesas Totais</th>
+            <th className="border border-gray-300 px-4 py-2">Lucro (R$)</th>
+            <th className="border border-gray-300 px-4 py-2">Margem de Lucro</th>
+            <th className="border border-gray-300 px-4 py-2">Crescimento (%)</th>
           </tr>
         </thead>
         <tbody>
           {dados.map((item, index) => (
             <tr key={index}>
               <td className="border border-gray-300 px-4 py-2">{item.mes}</td>
-              <td className="border border-gray-300 px-4 py-2">{item.consumo}</td>
+              <td className="border border-gray-300 px-4 py-2">{item.receita}</td>
+              <td className="border border-gray-300 px-4 py-2">{item.despesaFixa}</td>
+              <td className="border border-gray-300 px-4 py-2">{item.despesaVariavel}</td>
+              <td className="border border-gray-300 px-4 py-2">{item.despesaTotal}</td>
+              <td className="border border-gray-300 px-4 py-2">{item.lucro}</td>
+              <td className="border border-gray-300 px-4 py-2">{item.margemLucro}</td>
+              <td className="border border-gray-300 px-4 py-2">{item.crescimento}</td>
             </tr>
           ))}
         </tbody>

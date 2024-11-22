@@ -2,14 +2,24 @@
 
 import { useState } from "react";
 
+type SimulacaoForm = {
+  tipoEnergia: string;
+  capacidade: number;
+  localizacao: string;
+  prazo: number;
+  descricao: string; // Adicionado o campo descrição
+};
+
 export default function NovaSimulacao() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SimulacaoForm>({
     tipoEnergia: "",
-    capacidade: "",
+    capacidade: 0,
     localizacao: "",
+    prazo: 5,
+    descricao: "", // Inicializa descrição como string vazia
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -22,7 +32,6 @@ export default function NovaSimulacao() {
       },
       body: JSON.stringify(formData),
     });
-
     if (res.ok) {
       alert("Simulação criada com sucesso!");
     } else {
@@ -32,18 +41,15 @@ export default function NovaSimulacao() {
 
   return (
     <main className="p-8">
-      <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
-        Nova Simulação
-      </h1>
+      <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">Nova Simulação</h1>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white shadow-md rounded p-6">
         <div className="mb-4">
-          <label className="block text-gray-700">Tipo de Energia:</label>
+          <label className="block font-medium">Tipo de Energia:</label>
           <select
             name="tipoEnergia"
-            value={formData.tipoEnergia}
             onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
             required
-            className="w-full border rounded p-2"
           >
             <option value="">Selecione</option>
             <option value="solar">Solar</option>
@@ -51,29 +57,50 @@ export default function NovaSimulacao() {
           </select>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Capacidade (kW):</label>
+          <label className="block font-medium">Capacidade (kW):</label>
           <input
             type="number"
             name="capacidade"
-            value={formData.capacidade}
             onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
             required
-            className="w-full border rounded p-2"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Localização:</label>
+          <label className="block font-medium">Localização:</label>
           <input
             type="text"
             name="localizacao"
-            value={formData.localizacao}
             onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
             required
-            className="w-full border rounded p-2"
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
-          Salvar
+        <div className="mb-4">
+          <label className="block font-medium">Prazo (anos):</label>
+          <input
+            type="number"
+            name="prazo"
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded px-3 py-2"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block font-medium">Descrição:</label>
+          <textarea
+            name="descricao"
+            onChange={handleChange}
+            placeholder="Descreva brevemente o projeto"
+            className="w-full border border-gray-300 rounded px-3 py-2"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        >
+          Criar Simulação
         </button>
       </form>
     </main>

@@ -50,13 +50,57 @@ export default function Sobre() {
         </ul>
       </section>
 
-      {/* Imagem ou Gráfico (Opcional) */}
-      <section className="flex justify-center mt-10">
-        <img
-          src="/img/king.webp"
-          alt="Energia Sustentável"
-          className="rounded-lg shadow-md w-full max-w-4xl"
-        />
+      {/* Seção de Equipe */}
+      <section className="mt-12">
+        <h2 className="text-3xl font-semibold text-blue-500 mb-8 text-center">
+          Nossa Equipe
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Integrante 1 */}
+          <div className="flex flex-col items-center">
+            <img
+              src="/img/king.webp"
+              alt="Integrante 1"
+              className="w-32 h-32 rounded-full shadow-md"
+            />
+            <h3 className="text-xl font-semibold text-gray-700 mt-4">
+              João Silva
+            </h3>
+            <p className="text-gray-500 text-center">
+              Especialista em Energia Sustentável
+            </p>
+          </div>
+
+          {/* Integrante 2 */}
+          <div className="flex flex-col items-center">
+            <img
+              src="/img/king.webp"
+              alt="Integrante 2"
+              className="w-32 h-32 rounded-full shadow-md"
+            />
+            <h3 className="text-xl font-semibold text-gray-700 mt-4">
+              Maria Oliveira
+            </h3>
+            <p className="text-gray-500 text-center">
+              Engenheira de Projetos
+            </p>
+          </div>
+
+          {/* Integrante 3 */}
+          <div className="flex flex-col items-center">
+            <img
+              src="/img/king.webp"
+              alt="Integrante 3"
+              className="w-32 h-32 rounded-full shadow-md"
+            />
+            <h3 className="text-xl font-semibold text-gray-700 mt-4">
+              Carlos Mendes
+            </h3>
+            <p className="text-gray-500 text-center">
+              Desenvolvedor de Sistemas
+            </p>
+          </div>
+        </div>
       </section>
     </main>
   );

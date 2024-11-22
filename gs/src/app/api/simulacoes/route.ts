@@ -1,19 +1,153 @@
 import { NextResponse } from "next/server";
 
 let simulacoes = [
-  { id: 1, tipoEnergia: "solar", capacidade: 10, localizacao: "São Paulo" },
-  { id: 2, tipoEnergia: "eolica", capacidade: 50, localizacao: "Curitiba" },
+  {
+    id: 1,
+    tipoEnergia: "solar",
+    capacidade: 10,
+    localizacao: "São Paulo",
+    economia: 1500,
+    prazo: 5,
+    dataCriacao: "2024-11-22",
+    status: "Ativa",
+    co2Evitado: 3.5,
+    custoInstalacao: 25000,
+    roi: "4 anos",
+    descricao: "Sistema fotovoltaico residencial com capacidade de 10 kW.",
+  },
+  {
+    id: 2,
+    tipoEnergia: "eolica",
+    capacidade: 50,
+    localizacao: "Curitiba",
+    economia: 8000,
+    prazo: 10,
+    dataCriacao: "2024-11-21",
+    status: "Concluída",
+    co2Evitado: 20.0,
+    custoInstalacao: 100000,
+    roi: "6 anos",
+    descricao: "Parque eólico com capacidade de 50 kW.",
+  },
+  {
+    id: 3,
+    tipoEnergia: "solar",
+    capacidade: 20,
+    localizacao: "Belo Horizonte",
+    economia: 3000,
+    prazo: 7,
+    dataCriacao: "2024-11-20",
+    status: "Pendente",
+    co2Evitado: 7.0,
+    custoInstalacao: 50000,
+    roi: "5 anos",
+    descricao: "Sistema solar comercial para pequena empresa com capacidade de 20 kW.",
+  },
+  {
+    id: 4,
+    tipoEnergia: "eolica",
+    capacidade: 75,
+    localizacao: "Porto Alegre",
+    economia: 12000,
+    prazo: 12,
+    dataCriacao: "2024-11-19",
+    status: "Ativa",
+    co2Evitado: 30.0,
+    custoInstalacao: 150000,
+    roi: "6 anos",
+    descricao: "Projeto eólico de médio porte para indústria com capacidade de 75 kW.",
+  },
+  {
+    id: 5,
+    tipoEnergia: "hidraulica",
+    capacidade: 100,
+    localizacao: "Manaus",
+    economia: 25000,
+    prazo: 15,
+    dataCriacao: "2024-11-18",
+    status: "Concluída",
+    co2Evitado: 50.0,
+    custoInstalacao: 300000,
+    roi: "8 anos",
+    descricao: "Usina hidráulica para área rural com capacidade de 100 kW.",
+  },
+  {
+    id: 6,
+    tipoEnergia: "solar",
+    capacidade: 15,
+    localizacao: "Rio de Janeiro",
+    economia: 2250,
+    prazo: 6,
+    dataCriacao: "2024-11-17",
+    status: "Pendente",
+    co2Evitado: 5.25,
+    custoInstalacao: 37500,
+    roi: "5 anos",
+    descricao: "Sistema solar residencial para cobertura de prédio com capacidade de 15 kW.",
+  },
+  {
+    id: 7,
+    tipoEnergia: "biomassa",
+    capacidade: 30,
+    localizacao: "Recife",
+    economia: 4500,
+    prazo: 8,
+    dataCriacao: "2024-11-16",
+    status: "Ativa",
+    co2Evitado: 15.0,
+    custoInstalacao: 60000,
+    roi: "7 anos",
+    descricao: "Projeto de biomassa utilizando resíduos agrícolas com capacidade de 30 kW.",
+  },
+  {
+    id: 8,
+    tipoEnergia: "eolica",
+    capacidade: 40,
+    localizacao: "Florianópolis",
+    economia: 6400,
+    prazo: 9,
+    dataCriacao: "2024-11-15",
+    status: "Concluída",
+    co2Evitado: 16.0,
+    custoInstalacao: 80000,
+    roi: "6 anos",
+    descricao: "Parque eólico de pequeno porte para fornecimento local com capacidade de 40 kW.",
+  },
+  {
+    id: 9,
+    tipoEnergia: "hidraulica",
+    capacidade: 200,
+    localizacao: "Foz do Iguaçu",
+    economia: 50000,
+    prazo: 20,
+    dataCriacao: "2024-11-14",
+    status: "Ativa",
+    co2Evitado: 100.0,
+    custoInstalacao: 600000,
+    roi: "10 anos",
+    descricao: "Grande usina hidráulica para região industrial com capacidade de 200 kW.",
+  },
+  {
+    id: 10,
+    tipoEnergia: "solar",
+    capacidade: 25,
+    localizacao: "Salvador",
+    economia: 3750,
+    prazo: 7,
+    dataCriacao: "2024-11-13",
+    status: "Pendente",
+    co2Evitado: 8.75,
+    custoInstalacao: 62500,
+    roi: "6 anos",
+    descricao: "Projeto fotovoltaico para condomínio com capacidade de 25 kW.",
+  }
 ];
 
 // GET: Retorna todas as simulações
 export async function GET() {
-  return NextResponse.json(simulacoes);
-}
+  if (!simulacoes.length) {
+    return NextResponse.json({ message: "Nenhuma simulação disponível" }, { status: 200 });
+  }
 
-// POST: Cria uma nova simulação
-export async function POST(req: Request) {
-  const body = await req.json();
-  const novaSimulacao = { id: simulacoes.length + 1, ...body };
-  simulacoes.push(novaSimulacao);
-  return NextResponse.json(novaSimulacao, { status: 201 });
+  return NextResponse.json(simulacoes);
 }

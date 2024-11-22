@@ -31,6 +31,18 @@ export default function Header() {
           <Link href="/relatorios" className="hover:text-gray-200">
             Relatórios
           </Link>
+          <Link href="/microgrids" className="hover:text-gray-200">
+            Microgrids
+          </Link>
+          <Link href="/geracao-consumo" className="hover:text-gray-200">
+            Geração & Consumo
+          </Link>
+          <Link href="/fontes-energia" className="hover:text-gray-200">
+            Fontes de Energia
+          </Link>
+          <Link href="/estimativas" className="hover:text-gray-200">
+            Estimativas
+          </Link>
         </nav>
       </div>
     </header>

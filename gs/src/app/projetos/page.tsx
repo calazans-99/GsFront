@@ -1,14 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 // Definição do tipo Projeto
 type Projeto = {
-  id: string;
+  id: number;
   nome: string;
+  descricao: string;
   tipo: string;
   capacidade: number;
+  localizacao: string;
+  dataInicio: string;
+  dataTermino: string | null;
+  status: string;
+  custo: number;
+  retornoInvestimento: string;
 };
 
 export default function Projetos() {
@@ -44,17 +50,32 @@ export default function Projetos() {
           >
             <h2 className="text-2xl font-semibold text-blue-500">{projeto.nome}</h2>
             <p className="text-gray-600">
+              <strong>Descrição:</strong> {projeto.descricao}
+            </p>
+            <p className="text-gray-600">
               <strong>Tipo:</strong> {projeto.tipo}
             </p>
             <p className="text-gray-600">
               <strong>Capacidade:</strong> {projeto.capacidade} kW
             </p>
-            <Link
-              href={`/projetos/${projeto.id}`}
-              className="text-blue-500 hover:underline mt-2 block"
-            >
-              Ver Detalhes
-            </Link>
+            <p className="text-gray-600">
+              <strong>Localização:</strong> {projeto.localizacao}
+            </p>
+            <p className="text-gray-600">
+              <strong>Data de Início:</strong> {projeto.dataInicio}
+            </p>
+            <p className="text-gray-600">
+              <strong>Data de Término:</strong> {projeto.dataTermino || "Em andamento"}
+            </p>
+            <p className="text-gray-600">
+              <strong>Status:</strong> {projeto.status}
+            </p>
+            <p className="text-gray-600">
+              <strong>Custo:</strong> R$ {projeto.custo.toFixed(2)}
+            </p>
+            <p className="text-gray-600">
+              <strong>Retorno sobre Investimento:</strong> {projeto.retornoInvestimento}
+            </p>
           </div>
         ))}
       </div>

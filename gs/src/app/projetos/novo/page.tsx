@@ -7,9 +7,13 @@ export default function NovoProjeto() {
     nome: "",
     tipo: "",
     capacidade: "",
+    localizacao: "",
+    descricao: "",
+    dataInicio: "",
+    custo: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -71,6 +75,49 @@ export default function NovoProjeto() {
             required
             className="w-full border rounded p-2"
           />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Localização:</label>
+          <input
+            type="text"
+            name="localizacao"
+            value={formData.localizacao}
+            onChange={handleChange}
+            required
+            className="w-full border rounded p-2"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Data de Início:</label>
+          <input
+            type="date"
+            name="dataInicio"
+            value={formData.dataInicio}
+            onChange={handleChange}
+            required
+            className="w-full border rounded p-2"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Custo Estimado (R$):</label>
+          <input
+            type="number"
+            name="custo"
+            value={formData.custo}
+            onChange={handleChange}
+            required
+            className="w-full border rounded p-2"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700">Descrição:</label>
+          <textarea
+            name="descricao"
+            value={formData.descricao}
+            onChange={handleChange}
+            required
+            className="w-full border rounded p-2"
+          ></textarea>
         </div>
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
           Salvar
