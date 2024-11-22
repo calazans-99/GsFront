@@ -16,7 +16,7 @@ Clone o repositório do projeto utilizando o comando abaixo:
 
 bash
 Copiar código
-git clone https://github.com/calazans-99/GsFront
+git clone (https://github.com/ramonfn/GSJava.git)
 Acesse o diretório da API
 Navegue até o diretório do projeto utilizando o comando:
 
@@ -28,7 +28,7 @@ Execute o comando para baixar e instalar as dependências necessárias do Maven.
 
 Inicie o servidor local
 Após configurar tudo, o projeto estará disponível no endereço:
-http://localhost:3000.
+http://localhost:8080.
 
 Contribuintes do Projeto
 RM 556620 - Marcus Vinicius de Souza Calazans
