@@ -1,6 +1,6 @@
 import Image from "next/image";
-import help from "../../public/img/help.webp";
-import guincho from "../../public/img/porto-guincho.webp";
+import help from "../../public/img/king.webp";
+import guincho from "../../public/img/king.webp";
 
 export default function Home() {
   return (
