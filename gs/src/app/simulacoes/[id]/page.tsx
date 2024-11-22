@@ -2,60 +2,59 @@
 
 import { useEffect, useState } from "react";
 
-// Definição do tipo Projeto
-type Projeto = {
+type Simulacao = {
   id: string;
-  nome: string;
-  tipo: string;
+  tipoEnergia: string;
   capacidade: number;
-  descricao: string;
+  localizacao: string;
+  resultado: string;
 };
 
-export default function DetalhesProjeto({ params }: { params: { id: string } }) {
-  const [projeto, setProjeto] = useState<Projeto | null>(null);
+export default function DetalhesSimulacao({ params }: { params: { id: string } }) {
+  const [simulacao, setSimulacao] = useState<Simulacao | null>(null);
 
   useEffect(() => {
-    async function fetchProjeto() {
+    async function fetchSimulacao() {
       try {
-        const res = await fetch(`/api/projetos?id=${params.id}`);
-        if (!res.ok) throw new Error("Erro ao buscar dados do projeto.");
-        const data: Projeto = await res.json();
-        setProjeto(data);
+        const res = await fetch(`/api/simulacoes?id=${params.id}`);
+        if (!res.ok) throw new Error("Erro ao buscar simulação.");
+        const data: Simulacao = await res.json();
+        setSimulacao(data);
       } catch (error) {
         console.error(error);
       }
     }
-    fetchProjeto();
+    fetchSimulacao();
   }, [params.id]);
 
-  if (!projeto) {
+  if (!simulacao) {
     return <p className="text-center text-gray-500">Carregando...</p>;
   }
 
   return (
     <main className="p-8">
       <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
-        Detalhes do Projeto #{params.id}
+        Detalhes da Simulação #{params.id}
       </h1>
       <section className="max-w-lg mx-auto bg-white shadow-md rounded p-6">
         <div className="mb-4">
           <p className="text-gray-600 font-medium">
-            <span className="font-bold">Nome:</span> {projeto.nome}
+            <span className="font-bold">Tipo de Energia:</span> {simulacao.tipoEnergia}
           </p>
         </div>
         <div className="mb-4">
           <p className="text-gray-600 font-medium">
-            <span className="font-bold">Tipo:</span> {projeto.tipo}
+            <span className="font-bold">Capacidade:</span> {simulacao.capacidade} kW
           </p>
         </div>
         <div className="mb-4">
           <p className="text-gray-600 font-medium">
-            <span className="font-bold">Capacidade:</span> {projeto.capacidade} kW
+            <span className="font-bold">Localização:</span> {simulacao.localizacao}
           </p>
         </div>
         <div className="mb-4">
           <p className="text-gray-600 font-medium">
-            <span className="font-bold">Descrição:</span> {projeto.descricao}
+            <span className="font-bold">Resultado:</span> {simulacao.resultado}
           </p>
         </div>
       </section>

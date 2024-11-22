@@ -1,4 +1,6 @@
-import { useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 
 export default function EditarUsuario({ params }: { params: { id: string } }) {
   const [formData, setFormData] = useState({
@@ -7,17 +9,39 @@ export default function EditarUsuario({ params }: { params: { id: string } }) {
     telefone: "",
   });
 
+  useEffect(() => {
+    async function fetchUsuario() {
+      try {
+        const res = await fetch(`/api/usuarios?id=${params.id}`);
+        if (!res.ok) throw new Error("Erro ao buscar dados do usuário.");
+        const data = await res.json();
+        setFormData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUsuario();
+  }, [params.id]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Atualizando Usuário:", formData);
-    // Adicione a lógica para enviar os dados para a API
+    const res = await fetch(`/api/usuarios`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...formData, id: params.id }),
+    });
+
+    if (res.ok) {
+      alert("Usuário atualizado com sucesso!");
+    } else {
+      alert("Erro ao atualizar usuário.");
+    }
   };
 
   return (
@@ -25,80 +49,43 @@ export default function EditarUsuario({ params }: { params: { id: string } }) {
       <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
         Editar Usuário #{params.id}
       </h1>
-      <p className="text-lg text-gray-700 text-center mb-10">
-        Atualize as informações do usuário.
-      </p>
-
-      {/* Formulário de edição */}
-      <form
-        className="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8"
-        onSubmit={handleSubmit}
-      >
+      <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white shadow-md rounded p-6">
         <div className="mb-4">
-          <label
-            htmlFor="nome"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Nome
-          </label>
+          <label className="block text-gray-700">Nome:</label>
           <input
             type="text"
-            id="nome"
             name="nome"
             value={formData.nome}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Digite o nome do usuário"
             required
+            className="w-full border rounded p-2"
           />
         </div>
-
         <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            E-mail
-          </label>
+          <label className="block text-gray-700">Email:</label>
           <input
             type="email"
-            id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Digite o e-mail do usuário"
             required
+            className="w-full border rounded p-2"
           />
         </div>
-
-        <div className="mb-6">
-          <label
-            htmlFor="telefone"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Telefone
-          </label>
+        <div className="mb-4">
+          <label className="block text-gray-700">Telefone:</label>
           <input
             type="text"
-            id="telefone"
             name="telefone"
             value={formData.telefone}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Digite o telefone do usuário"
             required
+            className="w-full border rounded p-2"
           />
         </div>
-
-        <div className="flex items-center justify-center">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline"
-          >
-            Salvar Alterações
-          </button>
-        </div>
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+          Salvar
+        </button>
       </form>
     </main>
   );
