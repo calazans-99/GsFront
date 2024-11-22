@@ -1,5 +1,5 @@
 interface FormProjetoProps {
-    onSubmit: (data: any) => void;
+    onSubmit: (data: unknown) => void;
   }
   
   export default function FormProjeto({ onSubmit }: FormProjetoProps) {

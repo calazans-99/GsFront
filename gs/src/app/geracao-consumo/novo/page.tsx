@@ -34,7 +34,7 @@ export default function NovoRegistroGeracaoConsumo() {
       } else {
         alert("Erro ao criar registro.");
       }
-    } catch (error) {
+    } catch {
       alert("Erro ao conectar com o servidor.");
     }
   };

@@ -1,5 +1,5 @@
 interface FormUsuarioProps {
-    onSubmit: (data: any) => void;
+    onSubmit: (data: unknown) => void;
   }
   
   export default function FormUsuario({ onSubmit }: FormUsuarioProps) {

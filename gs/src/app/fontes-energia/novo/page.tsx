@@ -30,7 +30,7 @@ export default function NovaFonteEnergia() {
       } else {
         alert("Erro ao criar fonte de energia.");
       }
-    } catch (error) {
+    } catch {
       alert("Erro ao conectar com o servidor.");
     }
   };

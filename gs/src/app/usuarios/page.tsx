@@ -23,16 +23,21 @@ export default function Usuarios() {
       try {
         const res = await fetch("/api/usuarios");
         if (!res.ok) throw new Error("Erro ao carregar usuários.");
-        const data = await res.json();
+        const data: Usuario[] = await res.json();
         setUsuarios(data);
-      } catch (err: any) {
-        setError(err.message || "Erro inesperado.");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message); // Define a mensagem de erro
+        } else {
+          setError("Erro desconhecido ao carregar os usuários.");
+        }
       } finally {
         setLoading(false);
       }
     }
     fetchUsuarios();
   }, []);
+  
 
   if (loading) return <p className="text-center text-gray-500">Carregando...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;

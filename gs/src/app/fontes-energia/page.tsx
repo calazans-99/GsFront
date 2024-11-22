@@ -20,16 +20,24 @@ export default function FontesEnergiaList() {
       try {
         const res = await fetch("/api/fonte-energia");
         if (!res.ok) throw new Error("Erro ao buscar fontes de energia.");
+        
         const data = await res.json();
         setFontes(data);
-      } catch (err) {
-        setError("Erro ao carregar fontes de energia.");
+      } catch (error: unknown) {
+        // Lidando com o erro usando um tipo mais específico
+        if (error instanceof Error) {
+          setError(error.message || "Erro ao carregar fontes de energia.");
+        } else {
+          setError("Erro desconhecido ao carregar fontes de energia.");
+        }
       } finally {
         setLoading(false);
       }
     }
+  
     fetchFontes();
   }, []);
+  
 
   if (loading) {
     return <p className="text-center text-gray-500">Carregando...</p>;
@@ -57,12 +65,6 @@ export default function FontesEnergiaList() {
             key={fonte.id}
             className="border border-gray-300 rounded shadow-md p-4 bg-white"
           >
-            <h2 className="text-2xl font-semibold text-blue-500 mb-2">
-              {fonte.nome}
-            </h2>
-            <p>
-              <strong>Tipo:</strong> {fonte.tipo}
-            </p>
             <p>
               <strong>Descrição:</strong> {fonte.descricao}
             </p>

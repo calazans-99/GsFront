@@ -19,30 +19,42 @@ export default function MicrogridList() {
 
   // Fetch microgrids from API
   useEffect(() => {
-    async function fetchMicrogrids() {
+    const fetchMicrogrids = async () => {
       try {
         const res = await fetch("/api/microgrid");
-        if (!res.ok) throw new Error("Erro ao buscar microgrids.");
+        if (!res.ok) {
+          throw new Error("Erro ao buscar microgrids.");
+        }
         const data = await res.json();
         setMicrogrids(data);
-      } catch (err) {
-        setError("Erro ao carregar microgrids.");
+      } catch (error: unknown) {
+        // Verifica se o erro é do tipo Error
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Erro desconhecido ao carregar microgrids.");
+        }
       } finally {
         setLoading(false);
       }
-    }
+    };
+  
     fetchMicrogrids();
   }, []);
+  
 
-  // Handle delete action
   const handleDelete = async (id: number) => {
     if (confirm("Deseja realmente excluir este microgrid?")) {
       try {
         const res = await fetch(`/api/microgrid?id=${id}`, { method: "DELETE" });
         if (!res.ok) throw new Error("Erro ao excluir microgrid.");
         setMicrogrids((prev) => prev.filter((microgrid) => microgrid.id !== id));
-      } catch (err) {
-        alert("Erro ao excluir microgrid.");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          alert(`Erro ao excluir microgrid: ${err.message}`);
+        } else {
+          alert("Erro desconhecido ao excluir microgrid.");
+        }
       }
     }
   };

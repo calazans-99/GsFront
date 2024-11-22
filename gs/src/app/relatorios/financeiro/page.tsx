@@ -18,6 +18,7 @@ export default function RelatorioFinanceiro() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  
   useEffect(() => {
     async function fetchFinanceiro() {
       try {
@@ -25,8 +26,12 @@ export default function RelatorioFinanceiro() {
         if (!res.ok) throw new Error("Erro ao carregar dados financeiros.");
         const data: Financeiro[] = await res.json();
         setDados(data);
-      } catch (err: any) {
-        setError(err.message || "Erro inesperado.");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message); // Atualiza o estado com a mensagem do erro
+        } else {
+          setError("Erro desconhecido ao carregar os dados financeiros.");
+        }
       } finally {
         setLoading(false);
       }

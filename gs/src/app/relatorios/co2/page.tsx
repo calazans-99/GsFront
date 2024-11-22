@@ -23,15 +23,19 @@ export default function RelatorioCO2() {
         if (!res.ok) throw new Error("Erro ao carregar dados de emissões de CO₂.");
         const data: EmissaoCO2[] = await res.json();
         setDados(data);
-      } catch (err: any) {
-        setError(err.message || "Erro inesperado.");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message); // Atualiza o estado de erro
+        } else {
+          setError("Erro desconhecido ao carregar os dados.");
+        }
       } finally {
         setLoading(false);
       }
     }
     fetchCO2();
   }, []);
-
+  
   if (loading) return <p className="text-center text-gray-500">Carregando...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 

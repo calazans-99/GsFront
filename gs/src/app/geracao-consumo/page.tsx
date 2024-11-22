@@ -20,16 +20,24 @@ export default function GeracaoConsumoList() {
       try {
         const res = await fetch("/api/geracao-consumo");
         if (!res.ok) throw new Error("Erro ao buscar registros.");
+  
         const data = await res.json();
         setRegistros(data);
-      } catch (err) {
-        setError("Erro ao carregar registros.");
+      } catch (error: unknown) {
+        // Verifica se o erro é do tipo Error
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("Erro desconhecido ao carregar registros.");
+        }
       } finally {
         setLoading(false);
       }
     }
+  
     fetchRegistros();
   }, []);
+  
 
   if (loading) {
     return <p className="text-center text-gray-500">Carregando...</p>;

@@ -40,8 +40,6 @@ export default function SimulacoesPage() {
         }
 
         setSimulacoes(data);
-      } catch (err: any) {
-        setError(err.message || "Erro inesperado");
       } finally {
         setLoading(false);
       }

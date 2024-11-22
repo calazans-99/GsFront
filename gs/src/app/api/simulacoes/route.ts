@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-let simulacoes = [
+const simulacoes = [
   {
     id: 1,
     tipoEnergia: "solar",

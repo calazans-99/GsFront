@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 type Microgrid = {
   id: number;
@@ -28,8 +27,6 @@ export default function DetalhesMicrogrid({ params }: { params: { id: string } }
         }
         const data: Microgrid = await res.json();
         setMicrogrid(data);
-      } catch (err: any) {
-        setError(err.message || "Erro inesperado.");
       } finally {
         setLoading(false);
       }

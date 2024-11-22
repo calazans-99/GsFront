@@ -30,13 +30,17 @@ export default function DetalhesSimulacao({ params }: { params: { id: string } }
         if (!res.ok) throw new Error("Erro ao carregar a simulação.");
         const data: Simulacao = await res.json();
         setSimulacao(data);
-      } catch (err: any) {
-        setError(err.message || "Erro inesperado.");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message); // Armazena a mensagem de erro
+        } else {
+          setError("Erro desconhecido ao carregar a simulação.");
+        }
       } finally {
         setLoading(false);
       }
     }
-
+  
     fetchSimulacao();
   }, [params.id]);
 
