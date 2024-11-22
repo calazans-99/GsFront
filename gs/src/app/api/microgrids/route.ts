@@ -3,9 +3,12 @@ import { NextResponse } from "next/server";
 const baseUrl = "http://localhost:8080/microgrid"; // Substitua pelo URL correto do backend
 
 // GET: Retorna todos os microgrids ou um específico pelo ID
-export async function GET(req: Request, { params }: { params: { id?: string } }) {
+export async function GET(req: Request) {
   try {
-    const url = params.id ? `${baseUrl}/${params.id}` : baseUrl;
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    const url = id ? `${baseUrl}/${id}` : baseUrl;
+
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -27,6 +30,7 @@ export async function GET(req: Request, { params }: { params: { id?: string } })
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+
     const response = await fetch(baseUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -49,10 +53,21 @@ export async function POST(req: Request) {
 }
 
 // PUT: Atualiza um microgrid existente pelo ID
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "ID é obrigatório para atualizar um microgrid." },
+        { status: 400 }
+      );
+    }
+
     const body = await req.json();
-    const response = await fetch(`${baseUrl}/${params.id}`, {
+
+    const response = await fetch(`${baseUrl}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -74,9 +89,19 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 }
 
 // DELETE: Remove um microgrid pelo ID
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request) {
   try {
-    const response = await fetch(`${baseUrl}/${params.id}`, {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "ID é obrigatório para remover um microgrid." },
+        { status: 400 }
+      );
+    }
+
+    const response = await fetch(`${baseUrl}/${id}`, {
       method: "DELETE",
     });
 
