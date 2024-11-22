@@ -14,7 +14,7 @@ export default function EstimativasGeracao() {
 
   useEffect(() => {
     async function fetchEstimativas() {
-      const res = await fetch("/api/estimativa-geracao");
+      const res = await fetch("/api/estimativas");
       if (res.ok) {
         const data = await res.json();
         setEstimativas(data);

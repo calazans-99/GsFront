@@ -21,7 +21,7 @@ export default function MicrogridList() {
   useEffect(() => {
     const fetchMicrogrids = async () => {
       try {
-        const res = await fetch("/api/microgrid");
+        const res = await fetch("/api/microgrids");
         if (!res.ok) {
           throw new Error("Erro ao buscar microgrids.");
         }

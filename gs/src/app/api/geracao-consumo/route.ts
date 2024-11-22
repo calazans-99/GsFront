@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const baseUrl = "http://localhost:8080/geracao-consumo-mensal"; // Substitua pelo URL correto do backend
+const baseUrl = "http://localhost:8080/geracao-consumo"; // Substitua pelo URL correto do backend
 
 // GET: Retorna todos os registros ou um específico pelo ID
 export async function GET(req: Request) {

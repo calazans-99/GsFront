@@ -18,7 +18,7 @@ export default function FontesEnergiaList() {
   useEffect(() => {
     async function fetchFontes() {
       try {
-        const res = await fetch("/api/fonte-energia");
+        const res = await fetch("/api/fontes-energia");
         if (!res.ok) throw new Error("Erro ao buscar fontes de energia.");
         
         const data = await res.json();
