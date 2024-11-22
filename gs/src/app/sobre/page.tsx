@@ -59,45 +59,45 @@ export default function Sobre() {
           {/* Integrante 1 */}
           <div className="flex flex-col items-center">
             <img
-              src="/img/king.webp"
+              src="/img/Ramon.webp"
               alt="Integrante 1"
               className="w-32 h-32 rounded-full shadow-md"
             />
             <h3 className="text-xl font-semibold text-gray-700 mt-4">
-              João Silva
+            Felipe Nogueira Ramon
             </h3>
             <p className="text-gray-500 text-center">
-              Especialista em Energia Sustentável
+            Estudante 1TDSPH
             </p>
           </div>
 
           {/* Integrante 2 */}
           <div className="flex flex-col items-center">
             <img
-              src="/img/king.webp"
+              src="/img/Mari.webp"
               alt="Integrante 2"
               className="w-32 h-32 rounded-full shadow-md"
             />
             <h3 className="text-xl font-semibold text-gray-700 mt-4">
-              Maria Oliveira
+              Mariana Roberti Neri
             </h3>
             <p className="text-gray-500 text-center">
-              Engenheira de Projetos
+            Estudante 1TDSPH
             </p>
           </div>
 
           {/* Integrante 3 */}
           <div className="flex flex-col items-center">
             <img
-              src="/img/king.webp"
+              src="/img/Marcus.webp"
               alt="Integrante 3"
               className="w-32 h-32 rounded-full shadow-md"
             />
             <h3 className="text-xl font-semibold text-gray-700 mt-4">
-              Carlos Mendes
+              Marcus Calazans
             </h3>
             <p className="text-gray-500 text-center">
-              Desenvolvedor de Sistemas
+              Estudante 1TDSPH
             </p>
           </div>
         </div>
