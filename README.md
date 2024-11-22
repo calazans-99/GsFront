@@ -28,7 +28,7 @@ Execute o comando para baixar e instalar as dependências necessárias do Maven.
 
 Inicie o servidor local
 Após configurar tudo, o projeto estará disponível no endereço:
-http://localhost:8080.
+http://localhost:3000.
 
 Contribuintes do Projeto
 RM 556620 - Marcus Vinicius de Souza Calazans
