@@ -1,13 +1,14 @@
-export type Carro={
-    modelo: string;
-    placa: string;
-    ano: string;
-    quilometragem: string;
-    chassi: string;
-}
-
-export type CarroId={
-    idCarro:number;
-    idUsuario:number;
-    idSeguro:number;
-} & Carro
+export type Microgrid = {
+    modelo: string; 
+    capacidade: string; 
+    localizacao: string; 
+    status: string; 
+    identificacao: string; 
+  };
+  
+  export type MicrogridId = {
+    idMicrogrid: number; 
+    idUsuario: number; 
+    idProjeto: number; 
+  } & Microgrid;
+  
