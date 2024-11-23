@@ -80,13 +80,13 @@ export default function MicrogridList() {
   return (
     <main className="p-8 bg-gray-100 min-h-screen">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
+        <h1 className="text-4xl font-bold text-green-600 text-center mb-6">
           Microgrids
         </h1>
         <div className="text-right mb-4">
           <button
             onClick={() => router.push("/microgrid/novo")}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
           >
             Adicionar Microgrid
           </button>

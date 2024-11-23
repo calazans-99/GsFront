@@ -25,7 +25,7 @@ export default function EstimativasGeracao() {
 
   return (
     <main className="p-8">
-      <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
+      <h1 className="text-4xl font-bold text-green-600 text-center mb-6">
         Estimativas de Geração
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

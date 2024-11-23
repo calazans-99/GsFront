@@ -2,7 +2,7 @@ export default function Sobre() {
   return (
     <main className="p-8">
       {/* Título */}
-      <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
+      <h1 className="text-4xl font-bold text-green-600 text-center mb-6">
         Sobre o Flex Energy
       </h1>
 
@@ -15,7 +15,7 @@ export default function Sobre() {
 
       {/* Seção de Missão */}
       <section className="mb-8">
-        <h2 className="text-3xl font-semibold text-blue-500 mb-4">
+        <h2 className="text-3xl font-semibold text-green-600 mb-6">
           Nossa Missão
         </h2>
         <p className="text-gray-600 text-lg leading-relaxed">
@@ -27,7 +27,7 @@ export default function Sobre() {
 
       {/* Seção de Visão */}
       <section className="mb-8">
-        <h2 className="text-3xl font-semibold text-blue-500 mb-4">
+        <h2 className="text-3xl font-semibold text-green-600 mb-6">
           Nossa Visão
         </h2>
         <p className="text-gray-600 text-lg leading-relaxed">
@@ -39,7 +39,7 @@ export default function Sobre() {
 
       {/* Seção de Valores */}
       <section className="mb-8">
-        <h2 className="text-3xl font-semibold text-blue-500 mb-4">
+        <h2 className="text-3xl font-semibold text-green-600 mb-6">
           Nossos Valores
         </h2>
         <ul className="list-disc pl-5 space-y-2 text-gray-600 text-lg">
@@ -52,7 +52,7 @@ export default function Sobre() {
 
       {/* Seção de Equipe */}
       <section className="mt-12">
-        <h2 className="text-3xl font-semibold text-blue-500 mb-8 text-center">
+        <h2 className="text-3xl font-semibold text-green-600 mb-8 text-center">
           Nossa Equipe
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

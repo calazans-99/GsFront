@@ -36,7 +36,7 @@ interface Usuario {
               <td className="border p-2">{usuario.telefone || "N/A"}</td>
               <td className="border p-2">
                 <button
-                  className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600 mr-2"
+                  className="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600 mr-2"
                   onClick={() => onEditar(usuario.id)}
                 >
                   Editar

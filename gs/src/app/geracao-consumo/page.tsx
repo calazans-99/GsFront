@@ -49,7 +49,7 @@ export default function GeracaoConsumoList() {
 
   return (
     <main className="p-8">
-      <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
+      <h1 className="text-4xl font-bold text-green-600 text-center mb-6">
         Geração & Consumo
       </h1>
       <div className="text-right mb-4">

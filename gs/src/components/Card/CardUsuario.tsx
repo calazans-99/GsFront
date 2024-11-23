@@ -10,7 +10,7 @@ interface CardUsuarioProps {
         <h2 className="text-xl font-bold">{nome}</h2>
         <p className="text-gray-600">{email}</p>
         <button
-          className="bg-blue-500 text-white py-2 px-4 mt-4 rounded"
+          className="bg-green-500 text-white py-2 px-4 mt-4 rounded"
           onClick={onDetalhes}
         >
           Ver Detalhes

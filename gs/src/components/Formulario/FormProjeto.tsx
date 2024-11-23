@@ -20,7 +20,7 @@ interface FormProjetoProps {
           <label className="block font-bold">Descrição:</label>
           <textarea name="descricao" className="border rounded w-full p-2" required />
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+        <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded">
           Salvar
         </button>
       </form>
