@@ -27,6 +27,8 @@ export default function DetalhesMicrogrid({ params }: { params: { id: string } }
         }
         const data: Microgrid = await res.json();
         setMicrogrid(data);
+      } catch (err: any) {
+        setError(err.message || "Erro inesperado ao carregar o microgrid.");
       } finally {
         setLoading(false);
       }
@@ -35,40 +37,57 @@ export default function DetalhesMicrogrid({ params }: { params: { id: string } }
   }, [params.id]);
 
   if (loading) {
-    return <p className="text-center text-gray-500">Carregando...</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500">Carregando...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <p className="text-center text-red-500">{error}</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
   }
 
   if (!microgrid) {
     return (
-      <p className="text-center text-gray-500">
-        Microgrid não encontrado. Verifique o ID e tente novamente.
-      </p>
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-gray-500">
+          Microgrid não encontrado. Verifique o ID e tente novamente.
+        </p>
+      </div>
     );
   }
 
   return (
-    <main className="p-8">
-      <h1 className="text-4xl font-bold text-blue-600 text-center mb-6">
-        Detalhes do Microgrid #{params.id}
-      </h1>
-      <section className="max-w-lg mx-auto bg-white shadow-md rounded p-6">
-        <p className="mb-4">
-          <strong>Nome:</strong> {microgrid.nome}
-        </p>
-        <p className="mb-4">
-          <strong>Tipo:</strong> {microgrid.tipo}
-        </p>
-        <p className="mb-4">
-          <strong>Capacidade:</strong> {microgrid.capacidade} kW
-        </p>
-        <p className="mb-4">
-          <strong>Localização:</strong> {microgrid.localizacao}
-        </p>
-      </section>
+    <main className="p-8 bg-gray-100 min-h-screen">
+      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        {/* Header */}
+        <div className="bg-green-500 text-white p-6">
+          <h1 className="text-4xl font-bold text-center">
+            Detalhes do Microgrid #{params.id}
+          </h1>
+        </div>
+
+        {/* Conteúdo */}
+        <div className="p-6">
+          <p className="mb-4 text-gray-700">
+            <strong>Nome:</strong> {microgrid.nome}
+          </p>
+          <p className="mb-4 text-gray-700">
+            <strong>Tipo:</strong> {microgrid.tipo}
+          </p>
+          <p className="mb-4 text-gray-700">
+            <strong>Capacidade:</strong> {microgrid.capacidade} kW
+          </p>
+          <p className="mb-4 text-gray-700">
+            <strong>Localização:</strong> {microgrid.localizacao}
+          </p>
+        </div>
+      </div>
     </main>
   );
 }
